@@ -1,0 +1,137 @@
+import React, { Component } from 'react';
+import { StyleSheet, View, Text, Button, TextInput, Alert, Image, TouchableOpacity, YellowBox, ListView, Platform, Picker , ActivityIndicator } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import {DrawerNavigator} from 'react-navigation';
+
+class AddActivity extends Component {
+  constructor(props) {
+
+      super(props)
+
+      this.state = {
+
+        nama_lokasi: '',
+        alamat: '',
+        id_kategori: ''
+
+      };
+    }
+
+    InsertDataToServer = () =>{
+
+      console.log('launch');
+      Alert.alert('test');
+   const { nama_lokasi } = this.state ;
+   const { alamat } = this.state ;
+   const { id_kategori } = this.state ;
+
+
+
+   fetch('http://192.168.43.204/Z1515051022/datas/post/', {
+     method: 'POST',
+     headers: {
+       'Accept': 'application/json',
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify({
+
+       nama_lokasi: 'test',
+
+       alamat: 'alamat',
+
+       id_kategori: '2',
+
+     })
+
+   })
+  // .then((response) => response.json())
+  //       .then((responseJson) => {
+  //
+  // // Showing response message coming from server after inserting records.
+  //         // Alert.alert(responseJson);
+  //         console.log(responseJson.response);
+  //       }).catch((error) => {
+  //         console.error(error);
+  //       });
+
+
+    }
+
+    render() {
+      return (
+
+  <View style={styles.MainContainer}>
+
+          <TextInput
+
+            // Adding hint in Text Input using Place holder.
+            placeholder="Nama Lokasi"
+
+            onChangeText={Nama_Lokasi => this.setState({Nama_Lokasi})}
+
+            // Making the Under line Transparent.
+            underlineColorAndroid='transparent'
+
+            style={styles.TextInputStyleClass}
+          />
+
+          <TextInput
+
+            // Adding hint in Text Input using Place holder.
+            placeholder="Alamat"
+
+            onChangeText={Alamat => this.setState({Alamat})}
+
+            // Making the Under line Transparent.
+            underlineColorAndroid='transparent'
+
+            style={styles.TextInputStyleClass}
+          />
+
+          <TextInput
+
+            // Adding hint in Text Input using Place holder.
+            placeholder="Kategori"
+
+            onChangeText={Id_kategori => this.setState({ Id_kategori})}
+
+            // Making the Under line Transparent.
+            underlineColorAndroid='transparent'
+
+            style={styles.TextInputStyleClass}
+          />
+          <Text>
+            Kategori: 1 -> Bank, 2 -> Rumah Sakit
+          </Text>
+
+          <Button title="Insert Text Input Data to Server" onPress={this.InsertDataToServer} color="#2196F3" />
+  </View>
+
+      );
+    }
+  }
+
+  const styles = StyleSheet.create({
+
+  MainContainer :{
+
+  justifyContent: 'center',
+  flex:1,
+  margin: 10
+  },
+
+  TextInputStyleClass: {
+
+  textAlign: 'center',
+  marginBottom: 7,
+  height: 40,
+  borderWidth: 1,
+  // Set border Hex Color Code Here.
+   borderColor: '#FF5722',
+
+  // Set border Radius.
+   //borderRadius: 10 ,
+  }
+
+  });
+export default AddActivity;
